@@ -1,5 +1,6 @@
 package com.dog.example.bootstrap.web;
 
+import com.dog.example.bootstrap.entity.Dog;
 import com.dog.example.bootstrap.service.DogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,12 @@ public class DogController {
     @Autowired
     public void setDogService(DogService dogService) {
         this.dogService = dogService;
+    }
+
+    @GetMapping("/dogs")
+    public ResponseEntity<List<Dog>> getAllDogs() {
+        List<Dog> dogList = dogService.retrieveDogs();
+        return new ResponseEntity<List<Dog>>(dogList,HttpStatus.OK);
     }
 
     @GetMapping("/dog-breeds")
