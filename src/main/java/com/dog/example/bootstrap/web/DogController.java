@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -34,10 +35,10 @@ public class DogController {
     }
 
     @GetMapping("dog-breed")
-    public ResponseEntity<String> getBreedById(@RequestParam(value = "id") Long id) {
+    public ResponseEntity<List<String>> getBreedById(@RequestParam(value = "id") Long id) {
 
         String breed = dogService.retrieveDogBreedById(id);
-        return new ResponseEntity<String>(breed,HttpStatus.OK);
+        return new ResponseEntity<List<String>>(Collections.singletonList(breed),HttpStatus.OK);
     }
 
     @GetMapping("/dog-names")
